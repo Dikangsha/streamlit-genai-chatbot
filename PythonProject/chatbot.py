@@ -3,9 +3,15 @@ import os
 from dotenv import load_dotenv
 import streamlit as st
 from langchain_groq import ChatGroq
-
+import requests
 # Load the environment variables
 load_dotenv()
+
+try:
+    r = requests.get("https://api.groq.com", timeout=10)
+    st.write("Groq connection test:", r.status_code)
+except Exception as e:
+    st.write("Groq connection test failed:", repr(e))
 
 # Streamlit page setup
 st.set_page_config(
